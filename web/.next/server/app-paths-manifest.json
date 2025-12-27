@@ -1,0 +1,12 @@
+{
+  "/books/page": "app/books/page.js",
+  "/login/page": "app/login/page.js",
+  "/books/[id]/page": "app/books/[id]/page.js",
+  "/messages/[id]/page": "app/messages/[id]/page.js",
+  "/messages/page": "app/messages/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/cart/page": "app/cart/page.js",
+  "/checkout/page": "app/checkout/page.js",
+  "/orders/[id]/page": "app/orders/[id]/page.js",
+  "/wishlist/page": "app/wishlist/page.js"
+}

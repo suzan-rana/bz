@@ -1,0 +1,80 @@
+services:
+  app:
+    container_name: bookzone_app
+    restart: unless-stopped
+    build:
+      context: .
+      target: $DOCKERFILE_TARGET
+
+    volumes:
+      - bookzone_data:/app/
+      - .:/app
+    depends_on:
+      - redis
+      - worker_beat
+    ports:
+      - "8000:8000"
+    env_file:
+      - docker.env
+    networks:
+      - bookzone_net
+
+  worker_beat:
+    restart: unless-stopped
+    build:
+      context: .
+      target: worker
+    command: [ "/bin/sh", "-c", "celery -A core  worker -l info --concurrency=1" ]
+    env_file:
+      - docker.env
+    volumes:
+      - bookzone_data:/app/
+      - .:/app
+    networks:
+      - bookzone_net
+
+  redis:
+    container_name: bookzone_syncer_redis
+    image: redis:alpine
+    restart: always
+    volumes:
+      - bookzone_data:/app/
+    networks:
+      - bookzone_net
+
+  flower:
+    image: mher/flower
+    command: [ 'celery', '--broker=redis://redis:6379', 'flower', '--port=5555', "--basic-auth=$FLOWER_USERNAME:$FLOWER_PASSWORD" ]
+    ports:
+      - 7777:5555
+    env_file:
+      - docker.env
+    depends_on:
+      - redis
+    networks:
+      - bookzone_net
+
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: bookzone_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - bookzone_net
+
+volumes:
+  bookzone_data:
+    driver: local
+
+  pg_data:
+
+
+networks:
+  bookzone_net:
+    driver: bridge
+    name: bookzone_net

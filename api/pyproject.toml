@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bookzone"
+version = "0.7.0"
+description = ""
+authors = ["n1rjal <nirjalpaudel54312@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+line-length = 79  # Adjust the line length if necessary
+target-version = ['py311']  # Set your Python version, e.g. py37, py39, etc.
+skip-string-normalization = false  # Use double quotes everywhere

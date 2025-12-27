@@ -1,0 +1,157 @@
+#!/usr/bin/env python3
+"""
+BookZone Object Diagram Generator
+Shows a specific scenario with actual object instances
+"""
+
+def create_object_diagram():
+    diagram = """
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                           BookZone - Object Diagram (Scenario)                      │
+│                              Buyer-Seller Interaction                               │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ user1: User                                                                         │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440001"                                     │ │
+│ │ username: "john_doe"                                                            │ │
+│ │ email: "john@example.com"                                                       │ │
+│ │ first_name: "John"                                                              │ │
+│ │ last_name: "Doe"                                                                │ │
+│ │ is_seller: false                                                                │ │
+│ │ created_at: "2024-08-14 10:00:00"                                               │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ buys
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ book1: Book                                                                         │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440002"                                     │ │
+│ │ title: "The Great Gatsby"                                                       │ │
+│ │ author: "F. Scott Fitzgerald"                                                   │ │
+│ │ description: "A story of the fabulously wealthy Jay Gatsby..."                 │ │
+│ │ isbn: "978-0743273565"                                                          │ │
+│ │ price: 15.99                                                                    │ │
+│ │ quantity: 5                                                                      │ │
+│ │ condition: "Good"                                                               │ │
+│ │ cover_image: "gatsby_cover.jpg"                                                 │ │
+│ │ created_at: "2024-08-14 09:00:00"                                               │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ sells
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ user2: User                                                                         │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440003"                                     │ │
+│ │ username: "book_seller"                                                         │ │
+│ │ email: "seller@example.com"                                                     │ │
+│ │ first_name: "Jane"                                                              │ │
+│ │ last_name: "Smith"                                                              │ │
+│ │ is_seller: true                                                                 │ │
+│ │ created_at: "2024-08-14 08:00:00"                                               │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ participates
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ conversation1: Conversation                                                        │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440004"                                     │ │
+│ │ created_at: "2024-08-14 10:30:00"                                               │ │
+│ │ updated_at: "2024-08-14 11:15:00"                                               │ │
+│ │ is_active: true                                                                 │ │
+│ │ buyer: user1                                                                    │ │
+│ │ seller: user2                                                                   │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ contains
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ message1: Message                                                                  │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440005"                                     │ │
+│ │ content: "Hi! I'm interested in your book 'The Great Gatsby'. Is it still available?" │ │
+│ │ is_read: false                                                                  │ │
+│ │ created_at: "2024-08-14 10:30:00"                                               │ │
+│ │ conversation: conversation1                                                      │ │
+│ │ sender: user1                                                                   │ │
+│ │ book: book1                                                                     │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ message2: Message                                                                  │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440006"                                     │ │
+│ │ content: "Yes, it's still available! The book is in excellent condition."      │ │
+│ │ is_read: true                                                                   │ │
+│ │ created_at: "2024-08-14 11:15:00"                                               │ │
+│ │ conversation: conversation1                                                      │ │
+│ │ sender: user2                                                                   │ │
+│ │ book: book1                                                                     │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ order1: Order                                                                      │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440007"                                     │ │
+│ │ order_number: "ORD-2024-001"                                                    │ │
+│ │ status: "Pending"                                                               │ │
+│ │ total_amount: 15.99                                                             │ │
+│ │ shipping_address: "123 Main St, City, Country"                                 │ │
+│ │ customer_name: "John Doe"                                                       │ │
+│ │ customer_email: "john@example.com"                                              │ │
+│ │ created_at: "2024-08-14 11:30:00"                                               │ │
+│ │ customer: user1                                                                 │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    │ contains
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│ orderItem1: OrderItem                                                              │
+│ ┌─────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ id: "550e8400-e29b-41d4-a716-446655440008"                                     │ │
+│ │ quantity: 1                                                                      │ │
+│ │ price: 15.99                                                                     │ │
+│ │ order: order1                                                                    │ │
+│ │ book: book1                                                                      │ │
+│ └─────────────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+
+Scenario Description:
+1. John Doe (buyer) browses books and finds "The Great Gatsby" by Jane Smith (seller)
+2. John sends a message to Jane asking about the book availability
+3. Jane responds confirming the book is available
+4. John places an order for the book
+5. The system creates an order with one order item
+
+Key Features Demonstrated:
+• One conversation per buyer-seller pair
+• Messages can reference specific books
+• Order creation with order items
+• User roles (buyer vs seller)
+• Message read status tracking
+• UUID-based relationships
+"""
+    return diagram
+
+if __name__ == "__main__":
+    diagram = create_object_diagram()
+    print(diagram)
+    
+    # Save to file
+    with open('bookzone_object_diagram.txt', 'w') as f:
+        f.write(diagram)
+    
+    print("\nObject diagram saved to 'bookzone_object_diagram.txt'")
+    print("This shows a specific interaction scenario in the BookZone system.")
+
